@@ -11,6 +11,11 @@ module.exports = {
   target: 'web',
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    fallback: {
+      stream: false,
+      crypto: require.resolve('crypto-browserify'),
+      buffer: require.resolve('buffer'),
+    },
   },
   output: {
     filename: '[name].js',
@@ -36,6 +41,10 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+      process: 'process/browser',
     }),
   ],
   devServer: {
