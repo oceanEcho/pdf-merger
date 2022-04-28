@@ -16,6 +16,7 @@ export const Merger: FC = () => {
   };
 
   const [loading, setLoading] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
   const onClick = (): void => {
     if (files?.length) {
@@ -30,7 +31,7 @@ export const Merger: FC = () => {
         const url = URL.createObjectURL(mergedPdf);
 
         setLoading(false);
-        window.open(url, '_blank');
+        setPdfUrl(url);
       };
 
       render().catch((err) => {
@@ -45,9 +46,14 @@ export const Merger: FC = () => {
       {loading && <Loader />}
       <form className={styles.Merger}>
         <input type='file' multiple onChange={onFileInputChange} />
-        <Button onClick={onClick} disabled={loading || !!files?.length}>
+        <Button onClick={onClick} disabled={loading || !files?.length}>
           DO SOME MAGIC SHIT!
         </Button>
+        {pdfUrl && (
+          <a href={pdfUrl} target='_blank'>
+            Open!
+          </a>
+        )}
       </form>
     </>
   );
