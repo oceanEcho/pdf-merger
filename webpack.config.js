@@ -20,7 +20,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/pdf-merger/',
+    publicPath: 'auto',
   },
   module: {
     rules: [
