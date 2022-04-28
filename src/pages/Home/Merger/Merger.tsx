@@ -45,7 +45,7 @@ export const Merger: FC = () => {
       {loading && <Loader />}
       <form className={styles.Merger}>
         <input type='file' multiple onChange={onFileInputChange} />
-        <Button onClick={onClick} disabled={loading}>
+        <Button onClick={onClick} disabled={loading || !!files?.length}>
           DO SOME MAGIC SHIT!
         </Button>
       </form>
